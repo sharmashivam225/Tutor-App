@@ -1,0 +1,43 @@
+<%- model_class = SubjectCategory -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subject_categories.each do |subject_category| %>
+      <tr>
+        <td><%= link_to subject_category.id, subject_category_path(subject_category) %></td>
+        <td><%= subject_category.name %></td>
+        <td><%= subject_category.description %></td>
+        <td><%=l subject_category.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      subject_category_path(subject_category), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_subject_category_path(subject_category), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      subject_category_path(subject_category),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_subject_category_path,
+            :class => 'btn btn-primary' %>
+            <%= link_to t('.subjects', :default => t("helpers.links.back_to_sub")),
+              subjects_path, :class => 'btn btn-default'  %>
