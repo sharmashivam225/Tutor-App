@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :teachers
   resources :subjects
   resources :subject_categories
   get 'welcome/index'
